@@ -1,6 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
                                          // memcpy - void * memcpy ( void * destination, const void * source, size_t num )
-                               //ÄÚ´æ¿½±´
+                               //å†…å­˜æ‹·è´
 int main()
 {
     int arr1[] = { 1,2,3,4,5,6,7,8,8 };
@@ -9,7 +12,7 @@ int main()
     return 0;
 }
 
-//Ä£ÄâÊµÏÖmemcpy
+//æ¨¡æ‹Ÿå®ç°memcpy
 #include <assert.h>
 #include <string.h>
 void* my_memcpy(void* dest, const void* sourse, size_t num)
@@ -31,21 +34,21 @@ int main()
     my_memcpy(arr2, arr1, sizeof(arr1));
     int arr3[] = { 1,2,3,4,5,6,7,8,9 ,10};
     my_memcpy(arr3+2, arr3, 20);  
-    //Ï£Íû±ä³ÉÕâÑù arr3 = {1,2,1,2,3,4,5,8,9,10}    µ«ÊÇmemcpyÖ»¸ºÔğ¿½±´Á½¿é¶ÀÁ¢¿Õ¼äÖĞµÄÊı¾İ  ÓÖµ«ÊÇÔÚVS±à¼­Æ÷ÖĞmemcpyÄÜÊµÏÖmemmove¹¦ÄÜ
-    //ÖØµşÄÚ´æµÄ¿½±´Ó¦¸ÃÓÃµ½ memmoveº¯Êı
+    //å¸Œæœ›å˜æˆè¿™æ · arr3 = {1,2,1,2,3,4,5,8,9,10}    ä½†æ˜¯memcpyåªè´Ÿè´£æ‹·è´ä¸¤å—ç‹¬ç«‹ç©ºé—´ä¸­çš„æ•°æ®  åˆä½†æ˜¯åœ¨VSç¼–è¾‘å™¨ä¸­memcpyèƒ½å®ç°memmoveåŠŸèƒ½
+    //é‡å å†…å­˜çš„æ‹·è´åº”è¯¥ç”¨åˆ° memmoveå‡½æ•°
     return 0;
 }
 
 
                                       // memmove - void * memmove ( void * destination, const void * source, size_t num )
-                              // ÖØµşÄÚ´æÖ®¼äµÄÊı¾İ¿½±´
+                              // é‡å å†…å­˜ä¹‹é—´çš„æ•°æ®æ‹·è´
 int main()
 {
     int arr3[] = { 1,2,3,4,5,6,7,8,9 ,10};
     memmove(arr3+2, arr3, 20);
     for (int i = 0; i < 10; i++)
     {
-        printf("%d ", arr3[i]);   //´òÓ¡³ö1 2 1 2 3 4 5 8 9 10
+        printf("%d ", arr3[i]);   //æ‰“å°å‡º1 2 1 2 3 4 5 8 9 10
     }
     return 0;
 }
@@ -53,13 +56,13 @@ int main()
 
 
 
-//Ä£ÄâÊµÏÖmemmove
+//æ¨¡æ‹Ÿå®ç°memmove
 #include <assert.h>
 void* my_memmove(void* dest, const void* sourse, size_t num)
 {
     assert(dest && sourse);
     void* tmp = dest;
-    if (dest < sourse)   //´ÓÇ°Ïòºó¿½
+    if (dest < sourse)   //ä»å‰å‘åæ‹·
     {
         while (num--)
         {
@@ -68,7 +71,7 @@ void* my_memmove(void* dest, const void* sourse, size_t num)
             sourse = (char*)sourse + 1;
         }
     }
-    else                 //´ÓºóÏòÇ°¿½
+    else                 //ä»åå‘å‰æ‹·
     {
         while (num--)
         {
@@ -83,31 +86,31 @@ int main()
     my_memmove(arr3 + 2, arr3, 20);
     for (int i = 0; i < 10; i++)
     {
-        printf("%d ", arr3[i]);   //´òÓ¡³ö1 2 1 2 3 4 5 8 9 10
+        printf("%d ", arr3[i]);   //æ‰“å°å‡º1 2 1 2 3 4 5 8 9 10
     }
     return 0;
 }
 
 
                         // memcmp - int memcmp ( const void * ptr1, const void * ptr2, size_t num )
-                //ÄÚ´æ±È½Ï
+                //å†…å­˜æ¯”è¾ƒ
 int main()
 {
     int arr1[] = { 1,2,3,4,5}; // 01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05 00 00 00
     int arr2[] = { 1,3,2};     // 01 00 00 00 03 00 00 00 02 00 00 00
     int ret = memcmp(arr1, arr2, 12);    //arr1<arr2
-    printf("%d", ret); //Ğ¡ÓÚ0µÄÊı×Ö
+    printf("%d", ret); //å°äº0çš„æ•°å­—
     return 0;
 }
 
 
                               //memset - void * memset ( void * ptr, int value, size_t num )
-                     //ÄÚ´æÉèÖÃ  »á½«Ã¿¸ö×Ö½Ú¶¼±äÎªvalue
+                     //å†…å­˜è®¾ç½®  ä¼šå°†æ¯ä¸ªå­—èŠ‚éƒ½å˜ä¸ºvalue
 int main()
 {
     char arr1[] = "hello world";
     char arr2[] = "hello world";
-    memset(arr1, 'x', 5);      // 5ÊÇ×Ö½Ú
+    memset(arr1, 'x', 5);      // 5æ˜¯å­—èŠ‚
     printf("%s\n", arr1);
     memset(arr2 + 6, 'x', 5);
     printf("%s\n", arr2);
